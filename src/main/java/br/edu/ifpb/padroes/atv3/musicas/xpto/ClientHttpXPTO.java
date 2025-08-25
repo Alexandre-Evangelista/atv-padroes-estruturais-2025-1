@@ -1,6 +1,5 @@
 package br.edu.ifpb.padroes.atv3.musicas.xpto;
 
-import br.edu.ifpb.padroes.atv3.musicas.abcd.Musica;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
@@ -22,11 +21,11 @@ public class ClientHttpXPTO {
             HttpResponse<String> response = httpClient.send(songsRequest, HttpResponse.BodyHandlers.ofString());
 
             ObjectMapper objectMapper = new ObjectMapper();
-            List<Song> songsRetrieved = objectMapper.readValue(response.body(), objectMapper.getTypeFactory().constructCollectionType(List.class, Musica.class));
+            List<Song> songsRetrieved = objectMapper.readValue(response.body(),
+                    objectMapper.getTypeFactory().constructCollectionType(List.class, Song.class));
             return songsRetrieved;
         } catch (URISyntaxException | IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
-
 }

@@ -21,11 +21,11 @@ public class ClienteHttpABCD {
             HttpResponse<String> response = httpClient.send(musicaRequest, HttpResponse.BodyHandlers.ofString());
 
             ObjectMapper objectMapper = new ObjectMapper();
-            List<Musica> musicas = objectMapper.readValue(response.body(), objectMapper.getTypeFactory().constructCollectionType(List.class, Musica.class));
+            List<Musica> musicas = objectMapper.readValue(response.body(),
+                    objectMapper.getTypeFactory().constructCollectionType(List.class, Musica.class));
             return musicas;
         } catch (URISyntaxException | IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
-
 }
